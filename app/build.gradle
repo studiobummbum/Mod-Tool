@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+}
+
+def projectPath = "D:\\Working\\apktool\\output\\KiraKira+.apk"
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.io14.modproject"
+        minSdk 27
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets{
+        main {
+            manifest{
+                srcFile(projectPath + "/AndroidManifest.xml")
+            }
+
+            //Các thư mục smali
+            java {
+                srcDir(projectPath + "/smali")
+                srcDir(projectPath + "/smali_classes2")
+                srcDir(projectPath + "/smali_classes3")
+                srcDir(projectPath + "/smali_classes4")
+                srcDir(projectPath + "/smali_classes5")
+                srcDir(projectPath + "/smali_classes6")
+            }
+
+            //Thư mục res
+            res{
+                srcDir(projectPath + "/res")
+            }
+
+            assets{
+                srcDir(projectPath + "/assets")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation project(path: ':mylibrary')
+    //implementation files('libs\\082358_BloodPressureApp1-dex2jar.jar')
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.pixplicity.easyprefs:EasyPrefs:1.10.0'
+//    implementation file("D:\\Working\\apktool\\082358_BloodPressureApp1-dex2jar.jar")
+}
